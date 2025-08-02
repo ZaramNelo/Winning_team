@@ -1,17 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Medical ChatGPT Assistant with Pharmacy Finder
+
+A Next.js-powered medical assistant that provides health information and helps users find nearby pharmacies using ChatGPT and Google Maps integration.
+
+## Features
+
+🏥 **Medical Consultation**
+- Describe symptoms and get medical information
+- Over-the-counter medication recommendations
+- When to seek professional medical help
+- Built-in medical disclaimers for safety
+
+🗺️ **Pharmacy Finder**
+- Find nearest pharmacies using GPS location
+- Manual address input for pharmacy search
+- Google Maps integration for directions
+- Real-time location detection
+
+💬 **General Chat**
+- Powered by OpenAI's ChatGPT API
+- Interactive chat interface
+- Real-time responses
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- OpenAI API Key
+- Google Maps API Key (optional, for enhanced features)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd Winning_team
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Add your OpenAI API key
+   - (Optional) Add Google Maps API key for enhanced pharmacy search
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
