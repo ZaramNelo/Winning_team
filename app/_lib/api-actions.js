@@ -1,5 +1,7 @@
 "use server";
 import OpenAI from "openai";
+import { saveSymptomsToHistory } from "./database-actions";
+import { revalidatePath } from "next/cache";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -13,7 +15,7 @@ function chunkText(text, chunkSize) {
   return chunks;
 }
 
-export async function generateDiagnosis(symptoms, age, duration) {
+export async function generateDiagnosis(symptoms, age, duration, userId) {
   if (!symptoms) {
     return { success: false, error: "No symptoms provided." };
   }
@@ -63,6 +65,29 @@ export async function generateDiagnosis(symptoms, age, duration) {
         success: false,
         error: "Failed to parse diagnosis JSON: " + parseError.message,
       };
+    }
+    // Save to database if user is logged in
+    if (userId) {
+      try {
+        const saveResult = await saveSymptomsToHistory(userId, {
+          symptoms,
+          age,
+          duration,
+          diagnosis: parsedDiagnosis,
+        });
+
+        if (!saveResult.success) {
+          console.error("Failed to save symptoms:", saveResult.error);
+          // Don't fail the whole request if save fails, just log it
+        } else {
+          // Only works in server components
+          revalidatePath("/dashboard");
+          console.log("Symptoms saved successfully");
+        }
+      } catch (dbError) {
+        console.error("Database error:", dbError);
+        // Don't fail the whole request if save fails
+      }
     }
 
     return {

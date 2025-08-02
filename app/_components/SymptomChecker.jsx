@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { generateDiagnosis } from "../_lib/api-actions";
+import { useSession } from "next-auth/react";
+
 // import {
 //   analyzeSymptomsWithAI,
 //   formatDiagnosisForDisplay,
@@ -15,6 +17,9 @@ export default function SymptomChecker({ isOpen, onClose }) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
   const [error, setError] = useState(null);
+
+  const { data: session, status } = useSession();
+  console.log(session);
 
   const resetState = () => {
     setSymptoms("");
@@ -42,7 +47,8 @@ export default function SymptomChecker({ isOpen, onClose }) {
       const result = await generateDiagnosis(
         symptoms,
         parseInt(age) || null,
-        duration
+        duration,
+        session?.user?.userId
       );
 
       if (result.success) {
@@ -181,7 +187,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
                 <button
                   type="submit"
                   disabled={isAnalyzing || !symptoms.trim()}
-                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
                 >
                   {isAnalyzing ? (
                     <div className="flex items-center justify-center">
@@ -214,7 +220,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="px-4 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
+                  className="px-4 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors hover:cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -323,7 +329,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
               <div className="flex gap-3">
                 <button
                   onClick={resetState}
-                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors"
+                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors hover:cursor-pointer"
                 >
                   Check Different Symptoms
                 </button>

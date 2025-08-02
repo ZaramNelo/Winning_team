@@ -10,9 +10,9 @@ export default function CTASection({ onOpenSymptomChecker }) {
         </p>
         <button
           onClick={onOpenSymptomChecker}
-          className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors hover:cursor-pointer"
         >
-          Check Symptoms Now
+          Try Now for Free!
         </button>
       </div>
     </section>

@@ -84,7 +84,7 @@ export async function getSymptomsHistory(userId) {
 export async function saveSymptomsToHistory(userId, symptomsData) {
   try {
     const { data, error } = await supabase
-      .from("symptoms_history")
+      .from("symptomsHistory")
       .insert([
         {
           userId: userId,
