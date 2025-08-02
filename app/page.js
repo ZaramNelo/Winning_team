@@ -1,16 +1,36 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import Navigation from "./_components/Navigation";
+import HeroSection from "./_components/HeroSection";
+import FeaturesSection from "./_components/FeaturesSection";
+import ServicesSection from "./_components/ServicesSection";
+import CTASection from "./_components/CTASection";
+import Footer from "./_components/Footer";
+import SymptomChecker from "./_components/SymptomChecker";
 
 export default function Home() {
+  const [isSymptomCheckerOpen, setIsSymptomCheckerOpen] = useState(false);
+
+  const handleOpenSymptomChecker = () => {
+    setIsSymptomCheckerOpen(true);
+  };
+
+  const handleCloseSymptomChecker = () => {
+    setIsSymptomCheckerOpen(false);
+  };
+
   return (
-    <div className="font-sans flex items-center justify-center min-h-screen p-8">
-      <main className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          HealthCare Hub
-        </h1>
-        <p className="text-lg text-gray-600">
-          Your comprehensive healthcare management platform
-        </p>
-      </main>
+    <div className="font-sans min-h-screen bg-gray-50">
+      <Navigation />
+      <HeroSection onOpenSymptomChecker={handleOpenSymptomChecker} />
+      <FeaturesSection />
+      <ServicesSection />
+      <CTASection onOpenSymptomChecker={handleOpenSymptomChecker} />
+      <Footer />
+      <SymptomChecker
+        isOpen={isSymptomCheckerOpen}
+        onClose={handleCloseSymptomChecker}
+      />
     </div>
   );
 }
