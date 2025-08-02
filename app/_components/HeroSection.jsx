@@ -134,9 +134,8 @@ export default function HeroSection({ onOpenSymptomChecker }) {
             </div>
             <div className="mt-6 text-center">
               <p className="text-blue-100 text-sm md:text-base">
-                💾{" "}
                 <span className="font-medium">
-                  Sign in to save your symptoms and track your health history
+                  Sign in to save your results and track your health history
                 </span>
               </p>
             </div>

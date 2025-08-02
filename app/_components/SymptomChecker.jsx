@@ -104,7 +104,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
             </h2>
             <button
               onClick={handleClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 hover:cursor-pointer"
             >
               <svg
                 className="w-6 h-6"
@@ -331,7 +331,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
                   onClick={resetState}
                   className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors hover:cursor-pointer"
                 >
-                  Check Different Symptoms
+                  Check Different Symptom
                 </button>
               </div>
             </div>
