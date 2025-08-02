@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
-import { analyzeSymptomsWithAI } from "../utils/aiDiagnosis";
+import { generateDiagnosis } from "../_lib/api-actions";
+// import {
+//   analyzeSymptomsWithAI,
+//   formatDiagnosisForDisplay,
+//   getSeverityColor,
+//   getConfidenceDescription,
+// } from "../_lib/actions";
 
 export default function SymptomChecker({ isOpen, onClose }) {
   const [symptoms, setSymptoms] = useState("");
@@ -8,39 +14,71 @@ export default function SymptomChecker({ isOpen, onClose }) {
   const [duration, setDuration] = useState("Less than 24 hours");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
+  const [error, setError] = useState(null);
+
+  const resetState = () => {
+    setSymptoms("");
+    setAge("");
+    setDuration("Less than 24 hours");
+    setIsAnalyzing(false);
+    setDiagnosis(null);
+    setError(null);
+  };
+
+  const handleClose = () => {
+    resetState();
+    onClose();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!symptoms.trim()) return;
 
     setIsAnalyzing(true);
+    setError(null);
 
     try {
-      // Call the mock AI function with patient data
-      const result = await analyzeSymptomsWithAI(
+      // Call the server action with patient data
+      const result = await generateDiagnosis(
         symptoms,
         parseInt(age) || null,
         duration
       );
 
-      setDiagnosis(result.data);
+      if (result.success) {
+        setDiagnosis(result.data);
+      } else {
+        throw new Error(result.error || "Failed to analyze symptoms");
+      }
     } catch (error) {
       console.error("AI analysis error:", error);
+      setError(
+        error.message || "An error occurred during analysis. Please try again."
+      );
       // Fallback diagnosis
       setDiagnosis({
         possibleConditions: [
-          { name: "Common Cold", confidence: 85, severity: "Mild" },
-          { name: "Seasonal Allergies", confidence: 70, severity: "Mild" },
-          { name: "Sinus Infection", confidence: 45, severity: "Moderate" },
+          { name: "General Assessment", confidence: 70, severity: "Mild" },
         ],
         recommendations: [
+          "Monitor your symptoms closely",
           "Rest and stay hydrated",
-          "Consider over-the-counter decongestants",
-          "Monitor symptoms for 3-5 days",
+          "Consider over-the-counter medications if appropriate",
           "Seek medical attention if symptoms worsen",
         ],
         nextSteps:
-          "Schedule a follow-up with your doctor if symptoms persist beyond 10 days",
+          "Please consult with a healthcare provider for proper diagnosis and treatment",
+        aiInsights: {
+          confidence: 70,
+          analysisTime: "2.3 seconds",
+          symptomsAnalyzed: symptoms.split(" ").length,
+          ageConsideration: age
+            ? `Patient age: ${age} years`
+            : "Age not specified",
+          durationImpact: duration
+            ? `Duration: ${duration}`
+            : "Duration not specified",
+        },
       });
     } finally {
       setIsAnalyzing(false);
@@ -59,7 +97,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
               Symptom Checker
             </h2>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-gray-400 hover:text-gray-600"
             >
               <svg
@@ -77,6 +115,16 @@ export default function SymptomChecker({ isOpen, onClose }) {
               </svg>
             </button>
           </div>
+
+          {error && (
+            <div
+              className="bg-red-100 border border-red-200 text-red-800 px-4 py-3 rounded relative mb-4"
+              role="alert"
+            >
+              <strong className="font-bold">Error!</strong>
+              <span className="block sm:inline"> {error}</span>
+            </div>
+          )}
 
           {!diagnosis ? (
             <form onSubmit={handleSubmit}>
@@ -165,7 +213,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
                 </button>
                 <button
                   type="button"
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="px-4 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
                 >
                   Cancel
@@ -181,70 +229,84 @@ export default function SymptomChecker({ isOpen, onClose }) {
 
                 <div className="mb-6">
                   <h4 className="text-md font-medium text-gray-700 mb-3">
-                    Possible Conditions:
+                    Primary Diagnosis:
                   </h4>
-                  <div className="space-y-3">
-                    {diagnosis.possibleConditions.map((condition, index) => (
-                      <div key={index} className="text-black p-3 rounded-md">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium">{condition.name}</span>
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              condition.severity === "Mild"
-                                ? "bg-green-100 text-green-800"
-                                : condition.severity === "Moderate"
-                                ? "bg-yellow-100 text-yellow-800"
-                                : "bg-red-100 text-red-800"
-                            }`}
-                          >
-                            {condition.severity}
-                          </span>
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Confidence: {condition.confidence}%
-                        </div>
-                      </div>
-                    ))}
+                  <div className="bg-blue-50 border border-blue-200 rounded-md p-4 mb-3">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-blue-900">
+                        {diagnosis.primaryDiagnosis}
+                      </span>
+                      <span className="text-sm text-blue-700">
+                        Confidence: {diagnosis.confidence}%
+                      </span>
+                    </div>
+                    <div className="text-sm text-blue-700">
+                      Urgency:
+                      <span
+                        className={`ml-1 px-2 py-1 rounded-full text-xs font-medium ${
+                          diagnosis.urgency === "low"
+                            ? "bg-green-100 text-green-800"
+                            : diagnosis.urgency === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {diagnosis.urgency}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mb-6">
-                  <h4 className="text-md font-medium text-gray-700 mb-3">
-                    AI Recommendations:
-                  </h4>
-                  <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    {diagnosis.recommendations.map((rec, index) => (
-                      <li key={index}>{rec}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mb-6">
-                  <h4 className="text-md font-medium text-gray-700 mb-2">
-                    Next Steps:
-                  </h4>
-                  <p className="text-gray-700">{diagnosis.nextSteps}</p>
-                </div>
-
-                {diagnosis.aiInsights && (
-                  <div className="mb-6 bg-blue-50 border border-blue-200 rounded-md p-4">
-                    <h4 className="text-sm font-medium text-blue-800 mb-2">
-                      AI Analysis Details:
-                    </h4>
-                    <div className="text-xs text-blue-700 space-y-1">
-                      <p>Analysis Time: {diagnosis.aiInsights.analysisTime}</p>
-                      <p>
-                        Symptoms Analyzed:{" "}
-                        {diagnosis.aiInsights.symptomsAnalyzed}
-                      </p>
-                      <p>
-                        Age Consideration:{" "}
-                        {diagnosis.aiInsights.ageConsideration}
-                      </p>
-                      <p>
-                        Duration Impact: {diagnosis.aiInsights.durationImpact}
-                      </p>
+                {diagnosis.differentialDiagnoses &&
+                  diagnosis.differentialDiagnoses.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-md font-medium text-gray-700 mb-3">
+                        Other Possible Conditions:
+                      </h4>
+                      <ul className="list-disc list-inside space-y-2 text-gray-700">
+                        {diagnosis.differentialDiagnoses.map(
+                          (diagnosis, index) => (
+                            <li key={index}>{diagnosis}</li>
+                          )
+                        )}
+                      </ul>
                     </div>
+                  )}
+
+                {diagnosis.recommendedTests &&
+                  diagnosis.recommendedTests.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-md font-medium text-gray-700 mb-3">
+                        Recommended Tests:
+                      </h4>
+                      <ul className="list-disc list-inside space-y-2 text-gray-700">
+                        {diagnosis.recommendedTests.map((test, index) => (
+                          <li key={index}>{test}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {diagnosis.treatmentOptions &&
+                  diagnosis.treatmentOptions.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-md font-medium text-gray-700 mb-3">
+                        Treatment Options:
+                      </h4>
+                      <ul className="list-disc list-inside space-y-2 text-gray-700">
+                        {diagnosis.treatmentOptions.map((treatment, index) => (
+                          <li key={index}>{treatment}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {diagnosis.notes && (
+                  <div className="mb-6">
+                    <h4 className="text-md font-medium text-gray-700 mb-2">
+                      Additional Notes:
+                    </h4>
+                    <p className="text-gray-700">{diagnosis.notes}</p>
                   </div>
                 )}
 
@@ -260,21 +322,10 @@ export default function SymptomChecker({ isOpen, onClose }) {
 
               <div className="flex gap-3">
                 <button
-                  onClick={() => {
-                    setDiagnosis(null);
-                    setSymptoms("");
-                    setAge("");
-                    setDuration("Less than 24 hours");
-                  }}
+                  onClick={resetState}
                   className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors"
                 >
                   Check Different Symptoms
-                </button>
-                <button
-                  onClick={onClose}
-                  className="px-4 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
-                >
-                  Close
                 </button>
               </div>
             </div>

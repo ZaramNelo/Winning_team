@@ -15,13 +15,16 @@ export default function HeroSection({ onOpenSymptomChecker }) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={onOpenSymptomChecker}
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 hover:cursor-pointer transition-colors"
             >
-              Check Symptoms
+              Try it out
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+            <a
+              href="#features"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors hover:cursor-pointer inline-block text-center"
+            >
               Learn More
-            </button>
+            </a>
           </div>
         </div>
       </div>

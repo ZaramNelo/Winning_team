@@ -1,6 +1,6 @@
 export default function FeaturesSection() {
   return (
-    <section className="py-16 bg-white">
+    <section id="features" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -11,7 +11,7 @@ export default function FeaturesSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 text-black">
           <div className="text-center p-6">
             <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -29,7 +29,7 @@ export default function FeaturesSection() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Describe Symptoms</h3>
-            <p className="text-gray-600">
+            <p className="text-black">
               Enter your symptoms in natural language and provide additional
               details about your condition
             </p>
@@ -52,7 +52,7 @@ export default function FeaturesSection() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">AI Analysis</h3>
-            <p className="text-gray-600">
+            <p className="text-black">
               Our advanced AI analyzes your symptoms against a comprehensive
               medical database
             </p>
@@ -75,7 +75,7 @@ export default function FeaturesSection() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Get Diagnosis</h3>
-            <p className="text-gray-600">
+            <p className="text-black">
               Receive preliminary diagnosis, possible conditions, and
               recommended next steps
             </p>
