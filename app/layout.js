@@ -1,4 +1,5 @@
 import Navigation from "./_components/Navigation";
+import { auth } from "./_lib/auth";
 import "./globals.css";
 import Providers from "./providers";
 
@@ -7,12 +8,14 @@ export const metadata = {
   description: "AI-powered symptom checker and diagnostic platform",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body>
         <Providers>
-          <Navigation />
+          <Navigation session={session} />
           {children}
         </Providers>
       </body>

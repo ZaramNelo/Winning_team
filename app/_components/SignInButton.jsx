@@ -4,7 +4,7 @@ import { signInAction } from "@/app/_lib/auth-actions";
 function SignInButton() {
   // Has to be a form when calling the Auth.js sign in or sign out function
   return (
-    <form action={signInAction}>
+    <form action={signInAction} className="flex justify-center items-center">
       {/* <button className="border-primary-300 flex items-center gap-6 border px-10 py-4 text-lg font-medium">
         <Image
           src="https://authjs.dev/img/providers/google.svg"
@@ -14,7 +14,7 @@ function SignInButton() {
         />
         <span>Continue with Google</span>
       </button> */}
-      <button className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors hover:cursor-pointer">
+      <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors hover:cursor-pointer">
         <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
           <path
             fill="#4285F4"

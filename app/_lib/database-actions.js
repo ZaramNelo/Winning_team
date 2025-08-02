@@ -21,7 +21,7 @@ export async function getUser(email) {
   }
 }
 
-export async function createUser({ email, fullName, password = null }) {
+export async function createUser({ email, fullName = "", password }) {
   try {
     // First check if user exists
     const { data: existingUser } = await supabase
@@ -67,7 +67,7 @@ export async function getSymptomsHistory(userId) {
     const { data, error } = await supabase
       .from("symptomsHistory")
       .select("*")
-      .eq("user_id", userId)
+      .eq("userId", userId)
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -78,5 +78,34 @@ export async function getSymptomsHistory(userId) {
     return { success: true, data };
   } catch (error) {
     return { success: false, error: "Error fetching symptoms history" };
+  }
+}
+
+export async function saveSymptomsToHistory(userId, symptomsData) {
+  try {
+    const { data, error } = await supabase
+      .from("symptoms_history")
+      .insert([
+        {
+          userId: userId,
+          symptoms: symptomsData.symptoms,
+          age: symptomsData.age,
+          duration: symptomsData.duration,
+          diagnosis: symptomsData.diagnosis, // This will be the AI diagnosis JSON
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Error saving symptoms:", error);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Symptoms saved successfully for user:", userId);
+    return { success: true, data };
+  } catch (error) {
+    console.error("saveSymptomsToHistory exception:", error);
+    return { success: false, error: "Error saving symptoms" };
   }
 }

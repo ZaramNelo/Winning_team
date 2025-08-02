@@ -4,7 +4,7 @@ import { signIn, signOut } from "./auth";
 
 export async function signInAction() {
   // If you had more than one provider, you'd have to loop through them
-  await signIn("google", { redirectTo: "/" });
+  await signIn("google", { redirectTo: "/dashboard" });
 }
 
 export async function signOutAction() {

@@ -2,8 +2,9 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
-export default function Navigation() {
-  const { data: session, status } = useSession();
+// Have to put curly brackets for some reason (getting from parent)
+export default function Navigation({ session }) {
+  // const { data: session, status } = useSession();
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
@@ -15,7 +16,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link
-              href="/"
+              href={session ? "/dashboard" : "/"}
               className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
             >
               Healthwise
@@ -36,55 +37,55 @@ export default function Navigation() {
               >
                 Contact
               </Link> */}
-              <Link
-                href="#features"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Features
-              </Link>
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Symptom Checker
-              </Link>
-              {/* <Link
-                href="/"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Diagnosis
-              </Link> */}
-              {session && (
+              {session?.user ? (
                 <Link
                   href="/dashboard"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </Link>
+              ) : (
+                <>
+                  {" "}
+                  <Link
+                    href="#features"
+                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Features
+                  </Link>
+                  <Link
+                    href="/"
+                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Symptom Checker
+                  </Link>
+                  <Link
+                    href="#footer"
+                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Contact
+                  </Link>{" "}
+                </>
               )}
+
+              {/* <Link
+                href="/"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Diagnosis
+              </Link> */}
+
               {/* <Link
                 href="/"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Health Records
               </Link> */}
-              <Link
-                href="#footer"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Contact
-              </Link>
             </div>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            {status === "loading" ? (
-              // Loading state
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                <span className="text-sm text-gray-500">Loading...</span>
-              </div>
-            ) : session ? (
+            {session ? (
               // Signed in state
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
@@ -113,7 +114,7 @@ export default function Navigation() {
                   </Link> */}
                   <button
                     onClick={handleSignOut}
-                    className="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:cursor-pointer"
                   >
                     Sign Out
                   </button>

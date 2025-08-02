@@ -81,8 +81,7 @@ export default function SignIn() {
           </p>
         </div>
       </div>
-
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      {/* <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
@@ -133,10 +132,9 @@ export default function SignIn() {
                   placeholder="Enter your password"
                 />
               </div>
-            </div>
-
-            {/* <div className="flex items-center justify-between"> */}
-            {/* <div className="flex items-center">
+            </div> */}
+      {/* <div className="flex items-center justify-between"> */}
+      {/* <div className="flex items-center">
                 <input
                   id="remember-me"
                   name="remember-me"
@@ -150,8 +148,7 @@ export default function SignIn() {
                   Remember me
                 </label>
               </div> */}
-
-            {/* <div className="text-sm">
+      {/* <div className="text-sm">
                 <Link
                   href="/auth/forgot-password"
                   className="font-medium text-blue-600 hover:text-blue-500"
@@ -159,9 +156,8 @@ export default function SignIn() {
                   Forgot your password?
                 </Link>
               </div> */}
-            {/* </div> */}
-
-            <div>
+      {/* </div> */}
+      {/* <div>
               <button
                 type="submit"
                 disabled={isLoading}
@@ -170,19 +166,17 @@ export default function SignIn() {
                 {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
-          </form>
-
-          <div className="mt-6">
+          </form> */}
+      {/* <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">Or</span>
-              </div>
-            </div>
-            * {/* <div className="mt-6"> */}
-            {/* <button
+              </div> */}
+      {/* </div> */}* // {/* <div className="mt-6"> */}
+      {/* <button
                 onClick={handleGoogleSignIn}
                 disabled={isLoading}
                 className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
@@ -207,11 +201,11 @@ export default function SignIn() {
                 </svg>
                 {isLoading ? "Signing in..." : "Sign in with Google"}
               </button> */}
-            <SignInButton />
-            {/* </div> */}
-          </div>
-        </div>
-      </div>
+      <SignInButton />
     </div>
+    // </div>
+    // </div>
+    //   </div>
+    // </div>
   );
 }
