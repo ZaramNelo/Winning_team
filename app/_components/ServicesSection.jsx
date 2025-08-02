@@ -13,28 +13,36 @@ export default function ServicesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold mb-2">Symptom Checker</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              Symptom Checker
+            </h3>
             <p className="text-gray-600 text-sm">
               Enter symptoms and get instant preliminary diagnosis
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold mb-2">Condition Library</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              Condition Library
+            </h3>
             <p className="text-gray-600 text-sm">
               Browse detailed information about various medical conditions
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold mb-2">Treatment Options</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              Treatment Options
+            </h3>
             <p className="text-gray-600 text-sm">
               Get recommended treatments and lifestyle changes
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold mb-2">Doctor Consultation</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              Doctor Consultation
+            </h3>
             <p className="text-gray-600 text-sm">
               Connect with healthcare professionals for expert advice
             </p>

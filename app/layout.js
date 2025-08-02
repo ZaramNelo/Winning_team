@@ -1,3 +1,4 @@
+import Footer from "./_components/Footer";
 import Navigation from "./_components/Navigation";
 import { auth } from "./_lib/auth";
 import "./globals.css";
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }) {
         <Providers>
           <Navigation session={session} />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
