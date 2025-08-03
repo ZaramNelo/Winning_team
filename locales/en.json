@@ -1,0 +1,249 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "clear": "Clear",
+    "reset": "Reset"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account",
+      "email": "Email address",
+      "password": "Password",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "signInButton": "Sign In",
+      "signInWithGoogle": "Continue with Google",
+      "or": "Or",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create new account",
+      "signingIn": "Signing in...",
+      "invalidCredentials": "Invalid email or password",
+      "errorOccurred": "An error occurred during sign in",
+      "googleSignInError": "An error occurred during Google sign in"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Sign up for a new account",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "signUpButton": "Sign Up",
+      "signUpWithGoogle": "Sign up with Google",
+      "or": "Or",
+      "hasAccount": "Already have an account?",
+      "loginExisting": "Sign in to existing account",
+      "signingUp": "Creating account...",
+      "passwordsDontMatch": "Passwords don't match",
+      "accountExists": "Account with this email already exists",
+      "errorOccurred": "An error occurred during sign up",
+      "googleSignUpError": "An error occurred during Google sign up",
+      "termsAndPrivacy": "By signing up, you agree to our Terms of Service and Privacy Policy"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "AI Health Assistant & Pharmacy Finder",
+      "subtitle": "Get AI-powered symptom analysis and find nearby pharmacies for your medication needs",
+      "checkSymptoms": "Check Symptoms",
+      "findPharmacy": "Find Pharmacy",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "title": "How Our Symptom Checker Works",
+      "subtitle": "Get instant preliminary diagnosis based on your symptoms",
+      "step1": {
+        "title": "Describe Symptoms",
+        "description": "Enter your symptoms in natural language and provide additional details about your condition"
+      },
+      "step2": {
+        "title": "AI Analysis",
+        "description": "Our advanced AI analyzes your symptoms against a comprehensive medical database"
+      },
+      "step3": {
+        "title": "Get Diagnosis",
+        "description": "Receive preliminary diagnosis, possible conditions, and recommended next steps"
+      }
+    },
+    "services": {
+      "title": "Our Diagnostic Services",
+      "subtitle": "Comprehensive symptom analysis and health insights",
+      "cards": {
+        "symptomChecker": {
+          "title": "Symptom Checker",
+          "description": "Enter symptoms and get instant preliminary diagnosis"
+        },
+        "conditionLibrary": {
+          "title": "Condition Library",
+          "description": "Browse detailed information about various medical conditions"
+        },
+        "treatmentOptions": {
+          "title": "Treatment Options",
+          "description": "Get recommended treatments and lifestyle changes"
+        },
+        "doctorConsultation": {
+          "title": "Doctor Consultation",
+          "description": "Connect with healthcare professionals for expert advice"
+        }
+      }
+    },
+    "cta": {
+      "title": "Start Your Health Journey",
+      "subtitle": "Check symptoms with AI or find nearby pharmacies - all in one place",
+      "checkSymptomsNow": "Check Symptoms Now",
+      "findPharmacy": "Find Pharmacy"
+    }
+  },
+  "footer": {
+    "company": {
+      "name": "Healthwise",
+      "description": "AI-powered symptom checker and diagnostic platform"
+    },
+    "services": {
+      "title": "Services",
+      "symptomChecker": "Symptom Checker",
+      "diagnosis": "Diagnosis",
+      "conditionLibrary": "Condition Library",
+      "treatmentOptions": "Treatment Options"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "contactUs": "Contact Us",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service"
+    },
+    "connect": {
+      "title": "Connect",
+      "aboutUs": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "newsletter": "Newsletter"
+    },
+    "copyright": "© 2025 Healthwise. All rights reserved."
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Sign Out",
+    "login": "Sign In"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}!",
+    "welcomeDefault": "Welcome back, User!",
+    "subtitle": "Your health journey starts here",
+    "healthActions": "Health Actions",
+    "healthActionsSubtitle": "Check symptoms or find nearby pharmacies",
+    "checkSymptoms": "Check Symptoms",
+    "findPharmacy": "Find Pharmacy",
+    "recentHistory": "Recent Symptom History",
+    "noHistoryTitle": "No symptom history yet",
+    "noHistoryMessage": "Start by checking your symptoms to build your comprehensive health history",
+    "startFirstCheck": "Start Your First Check",
+    "viewAllEntries": "View all {count} entries →",
+    "stats": {
+      "totalChecks": "Total Checks",
+      "lowRisk": "Low Risk",
+      "highPriority": "High Priority"
+    }
+  },
+  "symptoms": {
+    "title": "Symptom Checker",
+    "defaultTitle": "Symptom Check",
+    "describeSymptoms": "Describe your symptoms in detail",
+    "symptomsPlaceholder": "Example: I have a headache, fever of 101°F, and fatigue for the past 2 days...",
+    "additionalInfo": "Additional Information (Optional)",
+    "age": "Age",
+    "duration": "Duration",
+    "durationOptions": {
+      "lessThan24": "Less than 24 hours",
+      "1to3days": "1-3 days",
+      "3to7days": "3-7 days",
+      "moreThan1week": "More than 1 week"
+    },
+    "analyzing": "Analyzing Symptoms...",
+    "checkDifferent": "Check Different Symptom",
+    "confidence": "Confidence: {percentage}%",
+    "urgency": "Urgency",
+    "urgencyLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "unknown": "Unknown"
+    },
+    "notes": "Notes",
+    "possibleConditions": "Other Possible Conditions:",
+    "recommendedTests": "Recommended Tests:",
+    "analysisError": "An error occurred during analysis. Please try again."
+  },
+  "pharmacy": {
+    "title": "Find Nearby Pharmacies",
+    "yourLocation": "Your Location",
+    "locationPlaceholder": "Enter your address or zip code...",
+    "useGPS": "Use GPS",
+    "gettingLocation": "Getting Location...",
+    "findPharmacies": "Find Pharmacies",
+    "findingPharmacies": "Finding Pharmacies...",
+    "mapView": "Map View",
+    "location": "Location: {location}",
+    "openFullMap": "Open Full Map",
+    "nearbyPharmacies": "Nearby Pharmacies ({count})",
+    "open": "Open",
+    "closed": "Closed",
+    "getDirections": "Get Directions →",
+    "distance": "{distance} away",
+    "rating": "{rating}/5.0",
+    "phone": "Phone",
+    "hours": "Hours",
+    "address": "Address",
+    "emptyTitle": "Find Nearby Pharmacies",
+    "emptyMessage": "Enter your location above to discover drug stores and pharmacies near you.",
+    "errors": {
+      "locationRequired": "Please provide a location or allow GPS access.",
+      "locationDenied": "Location access denied. Please enter your address manually.",
+      "geolocationNotSupported": "Geolocation is not supported by this browser.",
+      "serverError": "Server returned invalid data. Please try again.",
+      "fetchFailed": "Failed to find nearby pharmacies. Please try again."
+    }
+  },
+  "location": {
+    "permissionTitle": "Find Nearby Pharmacies",
+    "permissionMessage": "Would you like us to automatically find pharmacies near your current location? We'll use your device's GPS to show the closest options.",
+    "allowLocation": "Allow Location",
+    "notNow": "Not Now",
+    "manualNote": "You can also find pharmacies manually without sharing your location."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "notFound": "The requested resource was not found.",
+    "validation": "Please check your input and try again."
+  }
+}

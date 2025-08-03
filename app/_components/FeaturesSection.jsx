@@ -1,13 +1,17 @@
+import { useTranslations } from "../hooks/useTranslations";
+
 export default function FeaturesSection() {
+  const t = useTranslations();
+  
   return (
     <section id="features" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            How Our Symptom Checker Works
+            {t('home.features.title')}
           </h2>
           <p className="text-lg text-gray-600">
-            Get instant preliminary diagnosis based on your symptoms
+            {t('home.features.subtitle')}
           </p>
         </div>
 
@@ -28,10 +32,9 @@ export default function FeaturesSection() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Describe Symptoms</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('home.features.step1.title')}</h3>
             <p className="text-black">
-              Enter your symptoms in natural language and provide additional
-              details about your condition
+              {t('home.features.step1.description')}
             </p>
           </div>
 
@@ -51,10 +54,9 @@ export default function FeaturesSection() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">AI Analysis</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('home.features.step2.title')}</h3>
             <p className="text-black">
-              Our advanced AI analyzes your symptoms against a comprehensive
-              medical database
+              {t('home.features.step2.description')}
             </p>
           </div>
 
@@ -74,10 +76,9 @@ export default function FeaturesSection() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Get Diagnosis</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('home.features.step3.title')}</h3>
             <p className="text-black">
-              Receive preliminary diagnosis, possible conditions, and
-              recommended next steps
+              {t('home.features.step3.description')}
             </p>
           </div>
         </div>

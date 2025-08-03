@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "./hooks/useTranslations";
 import HeroSection from "./_components/HeroSection";
 import FeaturesSection from "./_components/FeaturesSection";
 import ServicesSection from "./_components/ServicesSection";
@@ -8,6 +9,7 @@ import SymptomChecker from "./_components/SymptomChecker";
 import PharmacyFinder from "./_components/PharmacyFinder";
 
 export default function Home() {
+  const t = useTranslations();
   const [isSymptomCheckerOpen, setIsSymptomCheckerOpen] = useState(false);
   const [isPharmacyFinderOpen, setIsPharmacyFinderOpen] = useState(false);
 

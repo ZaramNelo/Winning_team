@@ -1,0 +1,249 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "ok": "OK",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "clear": "Effacer",
+    "reset": "Réinitialiser"
+  },
+  "auth": {
+    "login": {
+      "title": "Bon Retour",
+      "subtitle": "Connectez-vous à votre compte",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié?",
+      "signInButton": "Se Connecter",
+      "signInWithGoogle": "Continuer avec Google",
+      "or": "Ou",
+      "noAccount": "Vous n'avez pas de compte?",
+      "createAccount": "Créer un nouveau compte",
+      "signingIn": "Connexion en cours...",
+      "invalidCredentials": "E-mail ou mot de passe invalide",
+      "errorOccurred": "Une erreur s'est produite lors de la connexion",
+      "googleSignInError": "Une erreur s'est produite lors de la connexion Google"
+    },
+    "signup": {
+      "title": "Créer un Compte",
+      "subtitle": "Inscrivez-vous pour un nouveau compte",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "firstNamePlaceholder": "Entrez votre prénom",
+      "lastNamePlaceholder": "Entrez votre nom de famille",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+      "signUpButton": "S'inscrire",
+      "signUpWithGoogle": "S'inscrire avec Google",
+      "or": "Ou",
+      "hasAccount": "Vous avez déjà un compte?",
+      "loginExisting": "Se connecter au compte existant",
+      "signingUp": "Création du compte...",
+      "passwordsDontMatch": "Les mots de passe ne correspondent pas",
+      "accountExists": "Un compte avec cet e-mail existe déjà",
+      "errorOccurred": "Une erreur s'est produite lors de l'inscription",
+      "googleSignUpError": "Une erreur s'est produite lors de l'inscription Google",
+      "termsAndPrivacy": "En vous inscrivant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Assistant Santé IA et Localisateur de Pharmacies",
+      "subtitle": "Obtenez une analyse de symptômes alimentée par l'IA et trouvez des pharmacies à proximité pour vos besoins en médicaments",
+      "checkSymptoms": "Vérifier les Symptômes",
+      "findPharmacy": "Trouver une Pharmacie",
+      "learnMore": "En Savoir Plus"
+    },
+    "features": {
+      "title": "Comment Fonctionne Notre Vérificateur de Symptômes",
+      "subtitle": "Obtenez un diagnostic préliminaire instantané basé sur vos symptômes",
+      "step1": {
+        "title": "Décrivez les Symptômes",
+        "description": "Entrez vos symptômes en langage naturel et fournissez des détails supplémentaires sur votre état"
+      },
+      "step2": {
+        "title": "Analyse IA",
+        "description": "Notre IA avancée analyse vos symptômes contre une base de données médicale complète"
+      },
+      "step3": {
+        "title": "Obtenez un Diagnostic",
+        "description": "Recevez un diagnostic préliminaire, les conditions possibles, et les prochaines étapes recommandées"
+      }
+    },
+    "services": {
+      "title": "Nos Services de Diagnostic",
+      "subtitle": "Analyse complète des symptômes et aperçus de santé",
+      "cards": {
+        "symptomChecker": {
+          "title": "Vérificateur de Symptômes",
+          "description": "Entrez vos symptômes et obtenez un diagnostic préliminaire instantané"
+        },
+        "conditionLibrary": {
+          "title": "Bibliothèque de Conditions",
+          "description": "Parcourez des informations détaillées sur diverses conditions médicales"
+        },
+        "treatmentOptions": {
+          "title": "Options de Traitement",
+          "description": "Obtenez des traitements recommandés et des changements de mode de vie"
+        },
+        "doctorConsultation": {
+          "title": "Consultation Médicale",
+          "description": "Connectez-vous avec des professionnels de la santé pour des conseils d'experts"
+        }
+      }
+    },
+    "cta": {
+      "title": "Commencez Votre Parcours de Santé",
+      "subtitle": "Vérifiez les symptômes avec l'IA ou trouvez des pharmacies à proximité - tout en un seul endroit",
+      "checkSymptomsNow": "Vérifier les Symptômes Maintenant",
+      "findPharmacy": "Trouver une Pharmacie"
+    }
+  },
+  "footer": {
+    "company": {
+      "name": "Healthwise",
+      "description": "Plateforme de diagnostic et vérificateur de symptômes alimentée par l'IA"
+    },
+    "services": {
+      "title": "Services",
+      "symptomChecker": "Vérificateur de Symptômes",
+      "diagnosis": "Diagnostic",
+      "conditionLibrary": "Bibliothèque de Conditions",
+      "treatmentOptions": "Options de Traitement"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Centre d'Aide",
+      "contactUs": "Nous Contacter",
+      "privacyPolicy": "Politique de Confidentialité",
+      "termsOfService": "Conditions d'Utilisation"
+    },
+    "connect": {
+      "title": "Connexion",
+      "aboutUs": "À Propos de Nous",
+      "careers": "Carrières",
+      "blog": "Blog",
+      "newsletter": "Newsletter"
+    },
+    "copyright": "© 2025 Healthwise. Tous droits réservés."
+  },
+  "navigation": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+    "login": "Se connecter"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue {name} !",
+    "welcomeDefault": "Bienvenue Utilisateur !",
+    "subtitle": "Votre parcours de santé commence ici",
+    "healthActions": "Actions de Santé",
+    "healthActionsSubtitle": "Vérifiez vos symptômes ou trouvez des pharmacies à proximité",
+    "checkSymptoms": "Vérifier les Symptômes",
+    "findPharmacy": "Trouver une Pharmacie",
+    "recentHistory": "Historique Récent des Symptômes",
+    "noHistoryTitle": "Aucun historique de symptômes pour le moment",
+    "noHistoryMessage": "Commencez par vérifier vos symptômes pour créer votre historique de santé complet",
+    "startFirstCheck": "Commencer Votre Premier Contrôle",
+    "viewAllEntries": "Voir toutes les {count} entrées →",
+    "stats": {
+      "totalChecks": "Contrôles Totaux",
+      "lowRisk": "Risque Faible",
+      "highPriority": "Priorité Élevée"
+    }
+  },
+  "symptoms": {
+    "title": "Vérificateur de Symptômes",
+    "defaultTitle": "Vérification de Symptômes",
+    "describeSymptoms": "Décrivez vos symptômes en détail",
+    "symptomsPlaceholder": "Exemple : J'ai un mal de tête, de la fièvre à 38°C, et de la fatigue depuis 2 jours...",
+    "additionalInfo": "Informations Supplémentaires (Optionnel)",
+    "age": "Âge",
+    "duration": "Durée",
+    "durationOptions": {
+      "lessThan24": "Moins de 24 heures",
+      "1to3days": "1-3 jours",
+      "3to7days": "3-7 jours",
+      "moreThan1week": "Plus d'1 semaine"
+    },
+    "analyzing": "Analyse des Symptômes...",
+    "checkDifferent": "Vérifier un Autre Symptôme",
+    "confidence": "Confiance : {percentage}%",
+    "urgency": "Urgence",
+    "urgencyLevels": {
+      "low": "Faible",
+      "medium": "Moyenne",
+      "high": "Élevée",
+      "unknown": "Inconnue"
+    },
+    "notes": "Notes",
+    "possibleConditions": "Autres Conditions Possibles :",
+    "recommendedTests": "Tests Recommandés :",
+    "analysisError": "Une erreur s'est produite lors de l'analyse. Veuillez réessayer."
+  },
+  "pharmacy": {
+    "title": "Trouver des Pharmacies à Proximité",
+    "yourLocation": "Votre Localisation",
+    "locationPlaceholder": "Entrez votre adresse ou code postal...",
+    "useGPS": "Utiliser GPS",
+    "gettingLocation": "Localisation en cours...",
+    "findPharmacies": "Trouver des Pharmacies",
+    "findingPharmacies": "Recherche de Pharmacies...",
+    "mapView": "Vue Carte",
+    "location": "Localisation : {location}",
+    "openFullMap": "Ouvrir la Carte Complète",
+    "nearbyPharmacies": "Pharmacies à Proximité ({count})",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "getDirections": "Obtenir l'Itinéraire →",
+    "distance": "à {distance}",
+    "rating": "{rating}/5,0",
+    "phone": "Téléphone",
+    "hours": "Horaires",
+    "address": "Adresse",
+    "emptyTitle": "Trouver des Pharmacies à Proximité",
+    "emptyMessage": "Entrez votre localisation ci-dessus pour découvrir les pharmacies près de chez vous.",
+    "errors": {
+      "locationRequired": "Veuillez fournir une localisation ou autoriser l'accès GPS.",
+      "locationDenied": "Accès à la localisation refusé. Veuillez entrer votre adresse manuellement.",
+      "geolocationNotSupported": "La géolocalisation n'est pas prise en charge par ce navigateur.",
+      "serverError": "Le serveur a renvoyé des données invalides. Veuillez réessayer.",
+      "fetchFailed": "Impossible de trouver des pharmacies à proximité. Veuillez réessayer."
+    }
+  },
+  "location": {
+    "permissionTitle": "Trouver des Pharmacies à Proximité",
+    "permissionMessage": "Souhaitez-vous que nous trouvions automatiquement des pharmacies près de votre localisation actuelle ? Nous utiliserons le GPS de votre appareil pour afficher les options les plus proches.",
+    "allowLocation": "Autoriser la Localisation",
+    "notNow": "Pas Maintenant",
+    "manualNote": "Vous pouvez également trouver des pharmacies manuellement sans partager votre localisation."
+  },
+  "errors": {
+    "generic": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "unauthorized": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "notFound": "La ressource demandée n'a pas été trouvée.",
+    "validation": "Veuillez vérifier votre saisie et réessayer."
+  }
+}

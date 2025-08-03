@@ -1,10 +1,13 @@
 "use client";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslations } from "../hooks/useTranslations";
 
 // Have to put curly brackets for some reason (getting from parent)
 export default function Navigation({ session }) {
   // const { data: session, status } = useSession();
+  const t = useTranslations();
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
@@ -42,7 +45,7 @@ export default function Navigation({ session }) {
                   href="/dashboard"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Dashboard
+                  {t('navigation.dashboard')}
                 </Link>
               ) : (
                 <>
@@ -85,6 +88,7 @@ export default function Navigation({ session }) {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             {session ? (
               // Signed in state
               <div className="flex items-center space-x-4">
@@ -116,7 +120,7 @@ export default function Navigation({ session }) {
                     onClick={handleSignOut}
                     className="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:cursor-pointer"
                   >
-                    Sign Out
+                    {t('navigation.logout')}
                   </button>
                 </div>
               </div>

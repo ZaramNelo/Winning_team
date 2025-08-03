@@ -2,11 +2,15 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "../hooks/useTranslations";
+import { useI18n } from "../contexts/I18nContext";
 import SymptomChecker from "@/app/_components/SymptomChecker";
 import PharmacyFinder from "@/app/_components/PharmacyFinder";
 
 export default function DashboardClient({ user, symptomsHistory = [] }) {
   console.log(symptomsHistory);
+  const t = useTranslations();
+  const { locale, setLocale } = useI18n();
   const { update } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -77,10 +81,10 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                     </svg>
                   </div>
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Welcome back, {user?.name || user?.fullName || "User"}!
+                    {t('dashboard.welcome', { name: user?.name || user?.fullName || '' }) || t('dashboard.welcomeDefault')}
                   </h1>
                   <p className="text-gray-600 mt-2 text-lg">
-                    Your health journey starts here
+                    {t('dashboard.subtitle')}
                   </p>
                 </div>
 
@@ -90,7 +94,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                     <div className="text-3xl font-bold mb-2">
                       {symptomsHistory?.length || 0}
                     </div>
-                    <div className="text-blue-100">Total Checks</div>
+                    <div className="text-blue-100">{t('dashboard.stats.totalChecks')}</div>
                   </div>
                   <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl p-6 text-center">
                     <div className="text-3xl font-bold mb-2">
@@ -100,7 +104,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         )?.length || 0
                       }
                     </div>
-                    <div className="text-green-100">Low Risk</div>
+                    <div className="text-green-100">{t('dashboard.stats.lowRisk')}</div>
                   </div>
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl p-6 text-center">
                     <div className="text-3xl font-bold mb-2">
@@ -110,7 +114,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         )?.length || 0
                       }
                     </div>
-                    <div className="text-purple-100">High Priority</div>
+                    <div className="text-purple-100">{t('dashboard.stats.highPriority')}</div>
                   </div>
                 </div>
               </div>
@@ -121,10 +125,10 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Health Actions
+                    {t('dashboard.healthActions')}
                   </h2>
                   <p className="text-gray-600 mt-1">
-                    Check symptoms or find nearby pharmacies
+                    {t('dashboard.healthActionsSubtitle')}
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -145,11 +149,11 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                       />
                     </svg>
-                    Check Symptoms
+                    {t('dashboard.checkSymptoms')}
                   </button>
                   <button
                     onClick={handleOpenPharmacyFinder}
-                    className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:cursor-pointer"
+                    className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:from-green-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:cursor-pointer"
                   >
                     <svg
                       className="w-5 h-5 inline mr-2"
@@ -170,14 +174,14 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    Find Pharmacy
+                    {t('dashboard.findPharmacy')}
                   </button>
                 </div>
               </div>
 
               {/* Symptom History Section */}
               <div className="mt-8">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Symptom History</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.recentHistory')}</h3>
 
               {!symptomsHistory || symptomsHistory.length === 0 ? (
                 <div className="text-center py-12">
@@ -197,17 +201,16 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                    No symptom history yet
+                    {t('dashboard.noHistoryTitle')}
                   </h3>
                   <p className="text-gray-500 mb-6 max-w-md mx-auto">
-                    Start by checking your symptoms to build your comprehensive
-                    health history
+                    {t('dashboard.noHistoryMessage')}
                   </p>
                   <button
                     onClick={handleOpenSymptomChecker}
                     className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
                   >
-                    Start Your First Check
+                    {t('dashboard.startFirstCheck')}
                   </button>
                 </div>
               ) : (
@@ -221,7 +224,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-gray-900 mb-2">
                             {entry.diagnosis?.primaryDiagnosis ||
-                              "Symptom Check"}
+                              t('symptoms.defaultTitle', {}, 'Symptom Check')}
                           </h3>
                           <p className="text-gray-600 text-sm leading-relaxed">
                             {entry.symptoms}
@@ -233,7 +236,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                               entry.diagnosis?.urgency
                             )}`}
                           >
-                            {entry.diagnosis?.urgency || "Unknown"} Urgency
+                            {t(`symptoms.urgencyLevels.${entry.diagnosis?.urgency || 'unknown'}`)} {t('symptoms.urgency')}
                           </span>
                         </div>
                       </div>
@@ -253,7 +256,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                               d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                             />
                           </svg>
-                          Confidence: {entry.diagnosis?.confidence || 0}%
+                          {t('symptoms.confidence', { percentage: entry.diagnosis?.confidence || 0 })}
                         </div>
                         <div className="flex items-center">
                           <svg
@@ -291,7 +294,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                             </svg>
                             <div>
                               <p className="text-sm font-medium text-blue-800 mb-1">
-                                Notes
+                                {t('symptoms.notes')}
                               </p>
                               <p className="text-sm text-blue-700">
                                 {entry.diagnosis.notes}
@@ -309,7 +312,7 @@ export default function DashboardClient({ user, symptomsHistory = [] }) {
                         onClick={() => router.push("/history")}
                         className="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors"
                       >
-                        View all {symptomsHistory.length} entries →
+                        {t('dashboard.viewAllEntries', { count: symptomsHistory.length })}
                       </button>
                     </div>
                   )}

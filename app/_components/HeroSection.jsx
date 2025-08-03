@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "../hooks/useTranslations";
 
 export default function HeroSection({ onOpenSymptomChecker, onOpenPharmacyFinder }) {
+  const t = useTranslations();
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -112,29 +114,29 @@ export default function HeroSection({ onOpenSymptomChecker, onOpenPharmacyFinder
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              AI Health Assistant & Pharmacy Finder
+              {t('home.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Get AI-powered symptom analysis and find nearby pharmacies for your medication needs
+              {t('home.hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={onOpenSymptomChecker}
                 className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 hover:cursor-pointer transition-all duration-200 hover:scale-105 transform"
               >
-                🩺 Check Symptoms
+                🩺 {t('home.hero.checkSymptoms')}
               </button>
               <button
                 onClick={onOpenPharmacyFinder}
                 className="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 hover:cursor-pointer transition-all duration-200 hover:scale-105 transform"
               >
-                🏥 Find Pharmacy
+                🏥 {t('home.hero.findPharmacy')}
               </button>
               <a
                 href="#features"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 hover:scale-105 transform hover:cursor-pointer inline-block text-center"
               >
-                Learn More
+                {t('home.hero.learnMore')}
               </a>
             </div>
             <div className="mt-6 text-center">
