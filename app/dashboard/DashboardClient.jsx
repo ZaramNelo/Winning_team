@@ -3,13 +3,15 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SymptomChecker from "@/app/_components/SymptomChecker";
+import PharmacyFinder from "@/app/_components/PharmacyFinder";
 
-export default function DashboardClient({ user, symptomsHistory }) {
+export default function DashboardClient({ user, symptomsHistory = [] }) {
   console.log(symptomsHistory);
   const { update } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isSymptomCheckerOpen, setIsSymptomCheckerOpen] = useState(false);
+  const [isPharmacyFinderOpen, setIsPharmacyFinderOpen] = useState(false);
 
   const handleOpenSymptomChecker = () => {
     setIsSymptomCheckerOpen(true);
@@ -17,6 +19,14 @@ export default function DashboardClient({ user, symptomsHistory }) {
 
   const handleCloseSymptomChecker = () => {
     setIsSymptomCheckerOpen(false);
+  };
+
+  const handleOpenPharmacyFinder = () => {
+    setIsPharmacyFinderOpen(true);
+  };
+
+  const handleClosePharmacyFinder = () => {
+    setIsPharmacyFinderOpen(false);
   };
 
   const formatDate = (dateString) => {
@@ -78,16 +88,16 @@ export default function DashboardClient({ user, symptomsHistory }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-6 text-center">
                     <div className="text-3xl font-bold mb-2">
-                      {symptomsHistory.length}
+                      {symptomsHistory?.length || 0}
                     </div>
                     <div className="text-blue-100">Total Checks</div>
                   </div>
                   <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl p-6 text-center">
                     <div className="text-3xl font-bold mb-2">
                       {
-                        symptomsHistory.filter(
+                        symptomsHistory?.filter(
                           (entry) => entry.diagnosis?.urgency === "low"
-                        ).length
+                        )?.length || 0
                       }
                     </div>
                     <div className="text-green-100">Low Risk</div>
@@ -95,9 +105,9 @@ export default function DashboardClient({ user, symptomsHistory }) {
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl p-6 text-center">
                     <div className="text-3xl font-bold mb-2">
                       {
-                        symptomsHistory.filter(
+                        symptomsHistory?.filter(
                           (entry) => entry.diagnosis?.urgency === "high"
-                        ).length
+                        )?.length || 0
                       }
                     </div>
                     <div className="text-purple-100">High Priority</div>
@@ -111,34 +121,65 @@ export default function DashboardClient({ user, symptomsHistory }) {
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Symptom History
+                    Health Actions
                   </h2>
                   <p className="text-gray-600 mt-1">
-                    Track your health journey over time
+                    Check symptoms or find nearby pharmacies
                   </p>
                 </div>
-                <button
-                  onClick={handleOpenSymptomChecker}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:cursor-pointer"
-                >
-                  <svg
-                    className="w-5 h-5 inline mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleOpenSymptomChecker}
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:cursor-pointer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  Add New Check
-                </button>
+                    <svg
+                      className="w-5 h-5 inline mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    Check Symptoms
+                  </button>
+                  <button
+                    onClick={handleOpenPharmacyFinder}
+                    className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:cursor-pointer"
+                  >
+                    <svg
+                      className="w-5 h-5 inline mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    Find Pharmacy
+                  </button>
+                </div>
               </div>
 
-              {symptomsHistory.length === 0 ? (
+              {/* Symptom History Section */}
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Symptom History</h3>
+
+              {!symptomsHistory || symptomsHistory.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-6">
                     <svg
@@ -171,7 +212,7 @@ export default function DashboardClient({ user, symptomsHistory }) {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  {symptomsHistory.slice(0, 5).map((entry, index) => (
+                  {(symptomsHistory || []).slice(0, 5).map((entry, index) => (
                     <div
                       key={index}
                       className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
@@ -262,7 +303,7 @@ export default function DashboardClient({ user, symptomsHistory }) {
                     </div>
                   ))}
 
-                  {symptomsHistory.length > 5 && (
+                  {symptomsHistory && symptomsHistory.length > 5 && (
                     <div className="text-center pt-6">
                       <button
                         onClick={() => router.push("/history")}
@@ -274,6 +315,7 @@ export default function DashboardClient({ user, symptomsHistory }) {
                   )}
                 </div>
               )}
+              </div>
             </div>
           </div>
         </div>
@@ -284,6 +326,13 @@ export default function DashboardClient({ user, symptomsHistory }) {
         isOpen={isSymptomCheckerOpen}
         onClose={handleCloseSymptomChecker}
         userId={user.userId}
+      />
+
+      {/* Pharmacy Finder Modal */}
+      <PharmacyFinder
+        isOpen={isPharmacyFinderOpen}
+        onClose={handleClosePharmacyFinder}
+        initialLocation={null}
       />
     </>
   );

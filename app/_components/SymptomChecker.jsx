@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { generateDiagnosis } from "../_lib/api-actions";
 import { useSession } from "next-auth/react";
+import PharmacyFinder from "./PharmacyFinder";
 
 // import {
 //   analyzeSymptomsWithAI,
@@ -17,6 +18,9 @@ export default function SymptomChecker({ isOpen, onClose }) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
   const [error, setError] = useState(null);
+  const [isPharmacyFinderOpen, setIsPharmacyFinderOpen] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [showLocationPermission, setShowLocationPermission] = useState(false);
 
   const { data: session, status } = useSession();
   console.log(session);
@@ -28,11 +32,58 @@ export default function SymptomChecker({ isOpen, onClose }) {
     setIsAnalyzing(false);
     setDiagnosis(null);
     setError(null);
+    setIsPharmacyFinderOpen(false);
+    setUserLocation(null);
+    setShowLocationPermission(false);
   };
 
   const handleClose = () => {
     resetState();
     onClose();
+  };
+
+  const requestLocationPermission = () => {
+    setShowLocationPermission(true);
+  };
+
+  const getUserLocation = async () => {
+    if (navigator.geolocation) {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000
+          });
+        });
+        
+        const coords = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        
+        setUserLocation(coords);
+        setShowLocationPermission(false);
+        setIsPharmacyFinderOpen(true);
+      } catch (error) {
+        console.error('Error getting location:', error);
+        setError('Unable to get your location. You can still find pharmacies manually.');
+        setShowLocationPermission(false);
+        setIsPharmacyFinderOpen(true);
+      }
+    } else {
+      setError('Geolocation is not supported by this browser.');
+      setShowLocationPermission(false);
+      setIsPharmacyFinderOpen(true);
+    }
+  };
+
+  const openPharmacyFinder = () => {
+    setIsPharmacyFinderOpen(true);
+  };
+
+  const closePharmacyFinder = () => {
+    setIsPharmacyFinderOpen(false);
   };
 
   const handleSubmit = async (e) => {
@@ -53,6 +104,10 @@ export default function SymptomChecker({ isOpen, onClose }) {
 
       if (result.success) {
         setDiagnosis(result.data);
+        // Automatically ask for location permission after diagnosis
+        setTimeout(() => {
+          setShowLocationPermission(true);
+        }, 1500); // Show location request after 1.5 seconds
       } else {
         throw new Error(result.error || "Failed to analyze symptoms");
       }
@@ -333,11 +388,79 @@ export default function SymptomChecker({ isOpen, onClose }) {
                 >
                   Check Different Symptom
                 </button>
+                <button
+                  onClick={openPharmacyFinder}
+                  className="flex-1 bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 transition-colors hover:cursor-pointer"
+                >
+                  🏥 Find Pharmacy
+                </button>
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* Location Permission Dialog */}
+      {showLocationPermission && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-2xl">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Find Nearby Pharmacies
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Would you like us to automatically find pharmacies near your current location? 
+                We'll use your device's GPS to show the closest options.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowLocationPermission(false)}
+                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-md font-medium hover:bg-gray-200 transition-colors"
+                >
+                  Not Now
+                </button>
+                <button
+                  onClick={getUserLocation}
+                  className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Allow Location
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-3">
+                You can also find pharmacies manually without sharing your location.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pharmacy Finder Modal */}
+      <PharmacyFinder 
+        isOpen={isPharmacyFinderOpen} 
+        onClose={closePharmacyFinder}
+        initialLocation={userLocation}
+      />
     </div>
   );
 }
