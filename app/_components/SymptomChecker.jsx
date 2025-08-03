@@ -144,6 +144,7 @@ export default function SymptomChecker({ isOpen, onClose }) {
                   placeholder="Example: I have a headache, fever of 101°F, and fatigue for the past 2 days..."
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-black"
                   rows="6"
+                  maxLength={500}
                   required
                 />
               </div>

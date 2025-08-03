@@ -53,12 +53,12 @@ export default function Navigation({ session }) {
                   >
                     Features
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/"
                     className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Symptom Checker
-                  </Link>
+                  </Link> */}
                   <Link
                     href="#footer"
                     className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
